@@ -32,6 +32,7 @@ namespace Jukebox
         public List<RiqEntity> TempoChanges => data.tempoChanges;
         public List<RiqEntity> VolumeChanges => data.volumeChanges;
         public List<RiqEntity> SectionMarkers => data.beatmapSections;
+        public List<RiqEntity> BeatResyncs => data.beatResyncs;
 
         static int nextId = 0;
         public static int UidProvider => ++nextId;
@@ -68,6 +69,7 @@ namespace Jukebox
             data.tempoChanges = new();
             data.volumeChanges = new();
             data.beatmapSections = new();
+            data.beatResyncs = new();
 
             ResetUidProvider();
         }
@@ -314,6 +316,16 @@ namespace Jukebox
             return e;
         }
 
+        public RiqEntity AddNewBeatResync(double time)
+        {
+            RiqEntity e = new RiqEntity("riq__BeatResync", 0, "global/beat resync", 0d, 0f, null);
+
+            e.CreateProperty("time", time);
+
+            data.beatResyncs.Add(e);
+            return e;
+        }
+
         static RiqBeatmapData ConvertFromDynamicBeatmap(DynamicBeatmap riq)
         {
             Debug.Log("Updating \"v0\" riq (DynamicBeatmap) to \"v1\" riq (RiqBeatmapData)");
@@ -427,5 +439,6 @@ namespace Jukebox
         public List<RiqEntity> tempoChanges;
         public List<RiqEntity> volumeChanges;
         public List<RiqEntity> beatmapSections;
+        public List<RiqEntity> beatResyncs;
     }
 }
