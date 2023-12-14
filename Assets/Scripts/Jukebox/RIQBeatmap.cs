@@ -76,6 +76,8 @@ namespace Jukebox
 
         public RiqBeatmap(string json)
         {
+            data.beatResyncs = new();
+
             if (json == string.Empty || json == null) throw new ArgumentNullException("json", "json cannot be null or empty");
             ResetUidProvider();
 
