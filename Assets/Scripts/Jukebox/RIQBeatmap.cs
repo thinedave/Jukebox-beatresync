@@ -323,6 +323,7 @@ namespace Jukebox
             RiqEntity e = new RiqEntity("riq__BeatResync", 0, "global/beat resync", 0d, 0f, null);
 
             e.CreateProperty("time", time);
+            e.CreateProperty("activated", false);
 
             data.beatResyncs.Add(e);
             return e;
